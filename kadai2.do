@@ -1,19 +1,20 @@
 use "Kadai2.dta"
 
 *** 1
-sum income_pop if D2013==0
-sum income_pop if D2013==1
+sum r_jimin
+sum r_komei
+sum income_pop
 
-sum income_pop if r_komei <= r_jimin
-sum income_pop if r_komei > r_jimin
-scatter r_jimin income_pop || scatter r_komei income_pop || lfit r_jimin income_pop || lfit r_komei income_pop
+
+scatter r_jimin income_pop || scatter r_komei income_pop || lfit r_jimin income_pop, leg(label(3 "自民党_lfit")) || lfit r_komei income_pop, leg(label(4 "公明党_lfit"))
 graph export scatter_all.jpg
 scatter r_jimin income_pop if r_komei <= r_jimin || scatter r_komei income_pop if r_komei > r_jimin
 graph export scatter_partial.jpg
 
 *** 2
-reg r_jimin income_pop r_pop20bellow r_pop65above r_unemployment D2013
-reg r_komei income_pop r_pop20bellow r_pop65above r_unemployment D2013
+gen income_pop_log = log(income_pop)
+reg r_jimin income_pop_log r_pop20bellow r_pop65above r_unemployment D2013
+reg r_komei income_pop_log r_pop20bellow r_pop65above r_unemployment D2013
 
 *** 3
 // variable adjustments
