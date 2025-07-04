@@ -34,7 +34,7 @@ scatter r_jimin income_pop if r_komei <= r_jimin || scatter r_komei income_pop i
 ![2](scatter_partial.jpg)
 
 ## 設問２
-自民党、公明党の得票率を説明変数に、課税対象所得を目的変数とした回帰分析を行う。
+自民党、公明党ごとに得票率を被説明変数に、指定された変数を説明変数とし分析する。
 ```stata
 . gen income_pop_log = log(income_pop)
 . reg r_jimin income_pop_log r_pop20bellow r_pop65above r_unemployment D2013
